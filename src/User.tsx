@@ -45,7 +45,12 @@ export default function User() {
         const remainingTime = Math.max(0, 3000 - elapsedTime);
         
         await new Promise(resolve => setTimeout(resolve, remainingTime));
-        setLinks(data);
+        if (Array.isArray(data)) {
+          setLinks(data);
+        } else {
+          console.error('Expected array from API, got:', data);
+          setLinks([]);
+        }
       } catch (err) {
         console.error('Failed to fetch links:', err);
         // Even on error, stay for 3s
