@@ -37,7 +37,7 @@ export default function User() {
     const fetchLinks = async () => {
       try {
         const startTime = Date.now();
-        const res = await fetch('http://localhost:5000/api/links');
+        const res = await fetch('https://for-venilla-bend.vercel.app/api/links');
         const data = await res.json();
         
         // Ensure at least 3 seconds of loading
