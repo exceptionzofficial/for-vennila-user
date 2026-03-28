@@ -29,6 +29,15 @@ interface PublishedLink {
   date: string;
 }
 
+const normalizeUrl = (url: string) => {
+  if (!url) return '';
+  const trimmed = url.trim();
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed;
+  }
+  return `https://${trimmed}`;
+};
+
 export default function User() {
   const [links, setLinks] = useState<PublishedLink[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -124,7 +133,7 @@ export default function User() {
                   links.map((item, index) => (
                     <motion.a
                       key={item._id}
-                      href={item.link}
+                      href={normalizeUrl(item.link)} 
                       target="_blank"
                       rel="noopener noreferrer"
                       initial={{ opacity: 0, y: 30 }}
